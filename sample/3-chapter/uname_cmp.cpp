@@ -1,5 +1,5 @@
 #include <iostream>
-#include <strings.h>
+#include <string.h>
 #include <sys/utsname.h>
 using namespace std;
 
