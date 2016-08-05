@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <string.h>
+
 using namespace std;
 
 #define UNDEF_DOCUMENT        0
