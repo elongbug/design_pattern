@@ -5,6 +5,7 @@ using namespace std;
 
 #define HPUX "HPUX"
 #define SUNOS "SunOS"
+#define LINUX "Linux"
 
 class Scanner {
   public : 
@@ -41,6 +42,11 @@ class SunParser : public Parser {};
 class SunCodeGenerator : public CodeGenerator {};
 class SunOptimizer : public Optimizer {};
 
+class LinuxScanner : public Scanner {};
+class LinuxParser : public Parser {};
+class LinuxCodeGenerator : public CodeGenerator {};
+class LinuxOptimizer : public Optimizer {};
+
 class CompilerFactory {  
   public :    
     virtual Scanner* CreateScanner() = 0;    
@@ -65,6 +71,14 @@ class SunCompilerFactory : public CompilerFactory {
     Optimizer* CreateOptimizer() { new SunOptimizer; }
 };
 
+class LinuxCompilerFactory : public CompilerFactory {
+  public :
+    Scanner* CreateScanner() { new LinuxScanner; }
+    Parser* CreateParser() { new LinuxParser; }
+    CodeGenerator* CreateCodeGenerator() { new LinuxCodeGenerator; }
+    Optimizer* CreateOptimizer() { new LinuxOptimizer; }
+};
+
 CompilerFactory *pFactory;  
 
 int main() {  
@@ -82,6 +96,10 @@ int main() {
   }
   else if (strncasecmp(sysInfo.sysname, SUNOS, strlen(SUNOS)) == 0) {  
     // -- Sun 용 객체 생성 및 사용
+    pFactory = new SunCompilerFactory;
+  }
+  else if (strncasecmp(sysInfo.sysname, LINUX, strlen(LINUX)) == 0) {
+    // -- Linux 용 객체 생성 및 사용
     pFactory = new SunCompilerFactory;
   }
   else {  
