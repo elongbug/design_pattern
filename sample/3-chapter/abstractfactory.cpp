@@ -100,7 +100,7 @@ int main() {
   }
   else if (strncasecmp(sysInfo.sysname, LINUX, strlen(LINUX)) == 0) {
     // -- Linux 용 객체 생성 및 사용
-    pFactory = new SunCompilerFactory;
+    pFactory = new LinuxCompilerFactory;
   }
   else {  
     // -- 지원 안하는 시스템 환경  
