@@ -1,0 +1,40 @@
+@startuml
+
+'skinparam handwritten true 
+'skinparam monochrome true
+
+class Director {
+	+ Construct(builder:Builder*)
+}
+
+abstract Builder {
+	+ {abstract} BuildPart()
+}
+
+class ConcreteBuilder {
+	+ BuildPart()
+	+ GetResult()
+}
+
+class Product 
+
+class Client
+
+note " for all objects in structure { \n    builder->BuildPart(); \n }" as N1
+note " ConcreteBuilder builder; \n Director director; \n director.Construct(&builder); \n Product *product = builder.GetResult();" as N2
+
+Director o-right-> Builder : builder
+
+Builder <|-- ConcreteBuilder
+
+Builder --[hidden]-> Product
+Builder --[hidden]-> ConcreteBuilder
+
+ConcreteBuilder .right.> Product
+
+Client -up-> Director
+Client -up-> ConcreteBuilder
+Client -up-> Product
+
+Director .. N1
+Client .. N2

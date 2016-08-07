@@ -1,0 +1,42 @@
+@startuml
+
+hide footbox
+
+participant aClient
+participant aDirector
+participant aConcreteBuilder
+
+activate aClient
+
+aClient --> aConcreteBuilder : create
+activate aConcreteBuilder
+deactivate aConcreteBuilder
+
+aClient --> aDirector : create
+activate aDirector
+deactivate aDirector
+
+aClient -> aDirector : Construct()
+activate aDirector
+
+aDirector -> aConcreteBuilder : BuildPartA()
+activate aConcreteBuilder
+deactivate aConcreteBuilder
+
+aDirector -> aConcreteBuilder : BuildPartB()
+activate aConcreteBuilder
+deactivate aConcreteBuilder
+
+aDirector -> aConcreteBuilder : BuildPartC()
+activate aConcreteBuilder
+deactivate aConcreteBuilder
+
+deactivate aDirector
+
+aClient -> aConcreteBuilder : GetResult()
+activate aConcreteBuilder
+deactivate aConcreteBuilder
+
+deactivate aClient
+
+@enduml

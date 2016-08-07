@@ -1,0 +1,47 @@
+@startuml
+
+'skinparam handwritten true 
+'skinparam monochrome true
+
+class Director {
+	+ DoTranslate()
+}
+
+abstract Translator {
+	+ {abstract} TranslateNormalSentence(s : string)
+	+ {abstract} TranslateInterrogativeSentence(s : string)
+	+ {abstract} TranslateImperativeSentence(s : string)
+	+ GetResult() : Manual
+}
+
+class EnglishTranslator {
+	+ TranslateNormalSentence(s : string)
+	+ TranslateInterrogativeSentence(s : string)
+	+ TranslateImperativeSentence(s : string)
+}
+
+class JapaneseTranslator {
+	+ TranslateNormalSentence(s : string)
+	+ TranslateInterrogativeSentence(s : string)
+	+ TranslateImperativeSentence(s : string)
+}
+
+class FrenchTranslator {
+	+ TranslateNormalSentence(s : string)
+	+ TranslateInterrogativeSentence(s : string)
+	+ TranslateImperativeSentence(s : string)
+}
+
+class Manual
+
+Director o-right-> Translator : translator
+
+Translator <|-- EnglishTranslator
+Translator <|-- JapaneseTranslator
+Translator <|-- FrenchTranslator
+
+EnglishTranslator ..> Manual
+JapaneseTranslator ..> Manual
+FrenchTranslator ..> Manual
+
+@enduml
